@@ -1,9 +1,10 @@
 package com.xg.domain;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.lang.model.element.Name;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,24 +13,45 @@ import java.util.Date;
  * @DATE: 2016-05-21 12:24.
  * @DESCRIPTION:
  */
-@JsonSerialize
-@JsonNaming(PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy.class)
+@Entity
+@Table(name = "ADDRESS")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Address implements Serializable {
-    private int addressId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ADDRESS_ID")
+    private int id;
+
+    @Column(name = "ADDRESS", nullable = false, length = 50)
     private String address;
+
+    @Column(name = "ADDRESS2", nullable = true, length = 50)
     private String address2;
+
+    @Column(name = "DISTRICT", nullable = false, length = 20)
     private String district;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CITY_ID")
     private City city;
+
+    @Column(name = "POSTAL_CODE", nullable = false, length = 10)
     private String postalCode;
+
+    @Column(name = "PHONE", nullable = false, length = 20)
     private String phone;
+
+    @Column(name = "LAST_UPDATE")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastUpdate;
 
-    public int getAddressId() {
-        return addressId;
+    public int getId() {
+        return id;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAddress() {

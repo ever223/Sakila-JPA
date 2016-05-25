@@ -19,7 +19,7 @@ import java.util.Date;
 public class Country implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "COUNTRY_ID")
     private int id;
 

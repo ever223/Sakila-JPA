@@ -20,14 +20,14 @@ import java.util.Set;
 public class Film implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "FILM_ID")
     private int id;
 
     @Column(name = "TITLE", nullable = false)
     private String title;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 255)
     private String description;
 
     @Column(name = "RELEASE_YEAR")
@@ -73,7 +73,7 @@ public class Film implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "ACTOR_ID")})
     private Set<Actor> actors;
 
-    @Column(name = "LAST_UPDATE")
+    @Column(name = "LAST_UPDATE", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastUpdate;
 

@@ -1,7 +1,9 @@
 package com.xg.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,19 +12,34 @@ import java.util.Date;
  * @DATE: 2016-05-21 12:34.
  * @DESCRIPTION:
  */
-@JsonSerialize
+
+@Entity
+@Table(name = "STORE")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Store implements Serializable {
-    private int storeId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "STORE_ID")
+    private int id;
+
+    @Column(name = "MANAGER_STAFF_ID", unique = true, nullable = false)
     private Staff staff;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ADDRESS_ID")
     private Address address;
+
+    @Column(name = "LAST_UPDATE")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastUpdate;
 
-    public int getStoreId() {
-        return storeId;
+    public int getId() {
+        return id;
     }
 
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Staff getStaff() {
