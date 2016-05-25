@@ -1,8 +1,11 @@
 package com.xg.service;
 
+import com.xg.domain.Category;
 import com.xg.domain.Language;
 import com.xg.repository.LanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,6 +62,10 @@ public class LanguageService {
         entity.setLastUpdate(new Date());
         repository.save(entity);
         return entity;
+    }
+
+    public Page<Language> findAll(String name, Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
 }

@@ -22,14 +22,14 @@ import java.util.Date;
 public class FilmService {
 
     @Autowired
-    private FilmRepository filmRepository;
+    private FilmRepository repository;
 
     public Film get(int id) {
-        return filmRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public Page<Film> find(String name, Pageable pageable) {
-        return filmRepository.findAll(pageable);
+        return repository.findAll(pageable);
     }
     @Transactional(readOnly = false)
     public Film add(Film film) {
@@ -37,7 +37,7 @@ public class FilmService {
             return null;
         }
         film.setLastUpdate(new Date());
-        filmRepository.save(film);
+        repository.save(film);
         return film;
     }
 
@@ -46,7 +46,10 @@ public class FilmService {
         if (film == null) {
             return false;
         }
-        filmRepository.delete(film);
+        repository.delete(film);
         return true;
+    }
+    public Page<Film> findAll(String name, Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

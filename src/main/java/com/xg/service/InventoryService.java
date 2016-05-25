@@ -1,8 +1,11 @@
 package com.xg.service;
 
+import com.xg.domain.Category;
 import com.xg.domain.Inventory;
 import com.xg.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,4 +64,7 @@ public class InventoryService {
         return entity;
     }
 
+    public Page<Inventory> findAll(String name, Pageable pageable) {
+        return repository.findAll(pageable);
+    }
 }

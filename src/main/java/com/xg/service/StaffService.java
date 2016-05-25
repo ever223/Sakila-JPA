@@ -1,8 +1,11 @@
 package com.xg.service;
 
+import com.xg.domain.Category;
 import com.xg.domain.Staff;
 import com.xg.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,4 +64,7 @@ public class StaffService {
         return entity;
     }
 
+    public Page<Staff> findAll(String name, Pageable pageable) {
+        return repository.findAll(pageable);
+    }
 }

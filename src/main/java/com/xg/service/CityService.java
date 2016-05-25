@@ -1,9 +1,8 @@
 package com.xg.service;
 
-import com.xg.domain.Actor;
+import com.xg.domain.Category;
 import com.xg.domain.City;
 import com.xg.repository.CityRepository;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,14 +22,14 @@ import java.util.Date;
 public class CityService {
 
     @Autowired
-    private CityRepository cityRepository;
+    private CityRepository repository;
 
     public City get(int id) {
-        return cityRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public Page<City> find(String name, Pageable pageable) {
-        return cityRepository.findAll(pageable);
+        return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = false)
@@ -39,7 +38,7 @@ public class CityService {
             return null;
         }
         city.setLastUpdate(new Date());
-        cityRepository.save(city);
+        repository.save(city);
         return city;
     }
 
@@ -48,7 +47,10 @@ public class CityService {
         if (city == null) {
             return false;
         }
-        cityRepository.delete(city);
+        repository.delete(city);
         return true;
+    }
+    public Page<City> findAll(String name, Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

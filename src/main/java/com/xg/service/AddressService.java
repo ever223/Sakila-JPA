@@ -2,7 +2,10 @@ package com.xg.service;
 
 import com.xg.domain.Address;
 import com.xg.repository.AddressRepository;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,4 +64,7 @@ public class AddressService {
         return entity;
     }
 
+    public Page<Address> findAll(String name, Pageable pageable) {
+        return repository.findAll(pageable);
+    }
 }

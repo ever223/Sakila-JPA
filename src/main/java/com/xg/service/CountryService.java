@@ -1,6 +1,6 @@
 package com.xg.service;
 
-import com.xg.domain.City;
+import com.xg.domain.Category;
 import com.xg.domain.Country;
 import com.xg.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,14 @@ import java.util.Date;
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class CountryService {
     @Autowired
-    private CountryRepository countryRepository;
+    private CountryRepository repository;
 
     public Country get(int id) {
-        return countryRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public Page<Country> find(String name, Pageable pageable) {
-        return countryRepository.findAll(pageable);
+        return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = false)
@@ -40,7 +40,7 @@ public class CountryService {
         }
 
         country.setLastUpdate(new Date());
-        countryRepository.save(country);
+        repository.save(country);
 
         return country;
     }
@@ -50,7 +50,21 @@ public class CountryService {
         if (city == null) {
             return false;
         }
-        countryRepository.delete(city);
+        repository.delete(city);
         return true;
+    }
+
+    @Transactional(readOnly = false)
+    public Country update(Country entity) {
+        if (entity == null) {
+            return null;
+        }
+        entity.setLastUpdate(new Date());
+        repository.save(entity);
+        return entity;
+    }
+
+    public Page<Country> findAll(String name, Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

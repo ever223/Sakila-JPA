@@ -17,6 +17,7 @@ import java.util.Date;
  * @DATE: 2016-05-24 19:29.
  * @DESCRIPTION:
  */
+
 @Service
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class ActorService {
@@ -53,5 +54,14 @@ public class ActorService {
         }
         actorRepository.delete(actor);
         return true;
+    }
+
+    @Transactional(readOnly = false)
+    public Actor update(Actor actor) {
+        if (actor == null) {
+            return null;
+        }
+        actorRepository.save(actor);
+        return actor;
     }
 }
