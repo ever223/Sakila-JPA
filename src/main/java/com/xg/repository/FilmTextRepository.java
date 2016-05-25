@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface FilemTextRepository extends PagingAndSortingRepository<FilmText, Integer> {
+public interface FilmTextRepository extends PagingAndSortingRepository<FilmText, Integer> {
 }
