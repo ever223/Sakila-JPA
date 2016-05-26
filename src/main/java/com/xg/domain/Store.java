@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @AUTHOR: xiaoo_gan
@@ -23,9 +24,12 @@ public class Store implements Serializable {
     @Column(name = "STORE_ID")
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "MANAGER_STAFF_ID", unique = true, nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "MANAGER_STAFF_ID", unique = true)
     private Staff staff;
+
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "store")
+//    private Set<Staff> staffs;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ADDRESS_ID", nullable = false)
@@ -50,6 +54,14 @@ public class Store implements Serializable {
     public void setStaff(Staff staff) {
         this.staff = staff;
     }
+
+//    public Set<Staff> getStaffs() {
+//        return staffs;
+//    }
+//
+//    public void setStaffs(Set<Staff> staffs) {
+//        this.staffs = staffs;
+//    }
 
     public Address getAddress() {
         return address;

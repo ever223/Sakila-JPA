@@ -41,8 +41,15 @@ public class Staff implements Serializable {
     @Column(name = "EMAIL", length = 50)
     private String email;
 
-    @Column(name = "STORE_ID", nullable = false)
+    @Column(name = "STORE_ID")
     private int storeId;
+
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "staff")
+//    private Set<Store> store1;
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "STORE_ID")
+//    private Store store;
 
     @Column(name = "ACTIVE", nullable = false)
     private boolean active;
@@ -112,6 +119,23 @@ public class Staff implements Serializable {
     public void setStoreId(int storeId) {
         this.storeId = storeId;
     }
+
+
+    //    public Set<Store> getStore1() {
+//        return store1;
+//    }
+//
+//    public void setStore1(Set<Store> store1) {
+//        this.store1 = store1;
+//    }
+//
+//    public Store getStore() {
+//        return store;
+//    }
+//
+//    public void setStore(Store store) {
+//        this.store = store;
+//    }
 
     public boolean isActive() {
         return active;
