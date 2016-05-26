@@ -28,7 +28,6 @@ public class Payment implements Serializable {
     @JoinColumn(name = "CUSTOMER_ID", nullable = false)
     private Customer customer;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "RENTAL_ID", nullable = true)
     private Rental rental;
@@ -36,10 +35,6 @@ public class Payment implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "STAFF_ID", nullable = false)
     private Staff staff;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ADDRESS_ID")
-    private Address address;
 
     @Column(name = "AMOUNT", precision = 5, scale = 2)
     private Double amount;
@@ -82,14 +77,6 @@ public class Payment implements Serializable {
 
     public void setStaff(Staff staff) {
         this.staff = staff;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public Double getAmount() {

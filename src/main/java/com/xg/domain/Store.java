@@ -23,11 +23,12 @@ public class Store implements Serializable {
     @Column(name = "STORE_ID")
     private int id;
 
-    @Column(name = "MANAGER_STAFF_ID", unique = true, nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "MANAGER_STAFF_ID", unique = true, nullable = false)
     private Staff staff;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ADDRESS_ID")
+    @JoinColumn(name = "ADDRESS_ID", nullable = false)
     private Address address;
 
     @Column(name = "LAST_UPDATE")

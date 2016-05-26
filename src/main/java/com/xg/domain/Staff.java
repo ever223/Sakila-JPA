@@ -1,6 +1,7 @@
 package com.xg.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -33,15 +34,15 @@ public class Staff implements Serializable {
     @JoinColumn(name = "ADDRESS_ID", nullable = false)
     private Address address;
 
+    @JsonIgnore
     @Column(name = "PICTURE")
     private Blob picture;
 
     @Column(name = "EMAIL", length = 50)
     private String email;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "STORE_ID", nullable = false)
-    private Store store;
+    @Column(name = "STORE_ID", nullable = false)
+    private int storeId;
 
     @Column(name = "ACTIVE", nullable = false)
     private boolean active;
@@ -104,12 +105,12 @@ public class Staff implements Serializable {
         this.email = email;
     }
 
-    public Store getStore() {
-        return store;
+    public int getStoreId() {
+        return storeId;
     }
 
-    public void setStore(Store store) {
-        this.store = store;
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 
     public boolean isActive() {

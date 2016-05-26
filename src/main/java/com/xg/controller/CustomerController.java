@@ -23,7 +23,8 @@ public class CustomerController {
 
     @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public Customer findCustomer(@PathVariable(value = "id") int id) {
-        return service.get(id);
+        Customer customer = service.get(id);
+        return customer;
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
